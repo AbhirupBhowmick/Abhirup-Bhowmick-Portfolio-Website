@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEURAL_SYNC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Geist:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "primary-fixed-dim": "#00dce6",
+                "secondary-fixed-dim": "#bbc3ff",
+                "on-background": "#e5e2e3",
+                "surface-container-lowest": "#0e0e0f",
+                "tertiary-container": "#f5cfff",
+                "on-secondary-fixed": "#000f5d",
+                "background": "#131314",
+                "on-tertiary-fixed-variant": "#74009f",
+                "on-secondary": "#001d93",
+                "on-primary-fixed": "#002022",
+                "on-surface": "#e5e2e3",
+                "inverse-on-surface": "#313031",
+                "on-tertiary-fixed": "#320047",
+                "tertiary-fixed-dim": "#ebb2ff",
+                "surface-variant": "#353436",
+                "surface-bright": "#3a393a",
+                "on-tertiary": "#520071",
+                "on-primary": "#00373a",
+                "surface-container-low": "#1c1b1c",
+                "primary": "#e3fdff",
+                "on-secondary-fixed-variant": "#002ccd",
+                "on-secondary-container": "#b1bbff",
+                "on-primary-fixed-variant": "#004f53",
+                "tertiary": "#fff6fc",
+                "on-surface-variant": "#b9cacb",
+                "inverse-surface": "#e5e2e3",
+                "secondary": "#bbc3ff",
+                "surface-container-high": "#2a2a2b",
+                "on-error": "#690005",
+                "secondary-container": "#0231de",
+                "inverse-primary": "#00696f",
+                "on-primary-container": "#006b71",
+                "primary-container": "#00f3ff",
+                "error-container": "#93000a",
+                "tertiary-fixed": "#f8d8ff",
+                "outline-variant": "#3a494b",
+                "error": "#ffb4ab",
+                "primary-fixed": "#6ff6ff",
+                "secondary-fixed": "#dee0ff",
+                "outline": "#849495",
+                "on-error-container": "#ffdad6",
+                "surface-tint": "#00dce6",
+                "surface-dim": "#131314",
+                "surface-container": "#201f20",
+                "on-tertiary-container": "#9b00d3",
+                "surface": "#131314",
+                "surface-container-highest": "#353436"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "gutter": "24px",
+                "margin-desktop": "64px",
+                "container-max": "1440px",
+                "unit": "4px",
+                "margin-mobile": "16px"
+        },
+        "fontFamily": {
+                "headline-md": [
+                        "Space Grotesk"
+                ],
+                "body-lg": [
+                        "Geist"
+                ],
+                "headline-lg": [
+                        "Space Grotesk"
+                ],
+                "body-md": [
+                        "Geist"
+                ],
+                "label-mono": [
+                        "JetBrains Mono"
+                ],
+                "headline-lg-mobile": [
+                        "Space Grotesk"
+                ],
+                "display-lg": [
+                        "Space Grotesk"
+                ]
+        },
+        "fontSize": {
+                "headline-md": [
+                        "32px",
+                        {
+                                "lineHeight": "1.3",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "1.6",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-mono": [
+                        "14px",
+                        {
+                                "lineHeight": "1.4",
+                                "letterSpacing": "0.1em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "32px",
+                        {
+                                "lineHeight": "1.2",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "72px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.04em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+    body {
+        background-color: #050505;
+        color: theme('colors.on-background');
+    }
+    .bg-grid-pattern {
+        background-size: 40px 40px;
+        background-image: 
+            linear-gradient(to right, rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+    }
+    .glow-shadow {
+        box-shadow: 0 20px 50px rgba(0, 243, 255, 0.1);
+    }
+    .neon-text-glow {
+        text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    }
+</style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative overflow-hidden">
+<!-- Background Grid -->
+<div class="absolute inset-0 bg-grid-pattern pointer-events-none z-0"></div>
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface-container/80 backdrop-blur-xl border-b border-primary-container/20 shadow-[0_20px_50px_rgba(0,243,255,0.1)] flex items-center justify-between px-margin-desktop h-20">
+<div class="font-display-lg text-headline-md text-primary-container tracking-tighter">
+        NEURAL_SYNC
+    </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant font-body-md hover:text-primary-fixed transition-all duration-300" href="#">Mainframe</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary-fixed transition-all duration-300" href="#">Nodes</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary-fixed transition-all duration-300" href="#">Telemetry</a>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="notifications" class="text-primary-container hover:text-primary-fixed transition-all duration-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="account_circle" class="text-primary-container hover:text-primary-fixed transition-all duration-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- Hero Section -->
+<main class="flex-grow flex items-center justify-center relative z-10 px-margin-mobile md:px-margin-desktop pt-24 pb-12">
+<div class="max-w-4xl w-full text-center flex flex-col items-center">
+<!-- Status Badge -->
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-surface-container-low/80 backdrop-blur-[12px] border border-primary-container/30 mb-8 rounded-none">
+<div class="w-2 h-2 bg-primary-container rounded-none shadow-[0_0_8px_#00f3ff]"></div>
+<span class="font-label-mono text-label-mono text-primary-container uppercase tracking-wider">System Online // V 4.0.1</span>
+</div>
+<!-- Headline -->
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface mb-4 tracking-tighter neon-text-glow">
+            OPERATOR_01
+        </h1>
+<!-- Role Sub-headline -->
+<div class="font-label-mono text-body-lg text-primary-fixed-dim mb-8 h-8 flex items-center justify-center">
+<span class="border-r-2 border-primary-container pr-1 animate-pulse">SYSTEM_ARCHITECT // FULL_STACK_INTEGRATOR</span>
+</div>
+<!-- Value Proposition -->
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-12">
+            Engineering high-fidelity neural interfaces and scalable backend infrastructures for the synthetic era. Precision execution mapped to infinite grid coordinates.
+        </p>
+<!-- CTAs -->
+<div class="flex flex-col md:flex-row items-center justify-center gap-6 w-full md:w-auto">
+<!-- Primary Action -->
+<button class="w-full md:w-auto px-8 py-4 bg-primary-container text-on-primary font-label-mono text-label-mono uppercase tracking-wider rounded-none hover:shadow-[0_0_20px_rgba(0,243,255,0.4)] transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+                View Projects
+            </button>
+<!-- Secondary Action -->
+<button class="w-full md:w-auto px-8 py-4 bg-transparent border border-primary-fixed-dim text-on-surface font-label-mono text-label-mono uppercase tracking-wider rounded-none hover:bg-primary-container/10 transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                Download Resume
+            </button>
+<!-- Tertiary Action -->
+<button class="w-full md:w-auto px-8 py-4 bg-surface-container-low/80 backdrop-blur-[12px] border border-outline-variant/30 text-on-surface font-label-mono text-label-mono uppercase tracking-wider rounded-none hover:border-primary-container/50 transition-all duration-300 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+                Talk to AI
+            </button>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute bottom-8 left-8 hidden md:flex flex-col gap-2 font-label-mono text-[10px] text-outline-variant">
+<span>SEC: 42.195.A</span>
+<span>LAT: 34.0522</span>
+<span>LNG: -118.2437</span>
+</div>
+<div class="absolute bottom-8 right-8 hidden md:flex flex-col items-end gap-2 font-label-mono text-[10px] text-outline-variant">
+<span>SYNC_RATE: 99.9%</span>
+<span>ENCRYPTION: AES-256</span>
+</div>
+</div>
+</main>
+</body></html>
