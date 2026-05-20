@@ -19,6 +19,7 @@ const navItems = [
   { name: "STACK", id: "stack" },
   { name: "LAB", id: "lab" },
   { name: "TIMELINE", id: "timeline" },
+  { name: "SYSTEMS", id: "systems" },
   { name: "CONTACT", id: "contact" }
 ];
 
@@ -79,15 +80,43 @@ export default function Navbar() {
       lastScrollY.current = currentScrollY;
       lastScrollTime.current = currentTime;
 
-      const sections = navItems.map(item => document.getElementById(item.id));
-      const scrollPosition = currentScrollY + 120; // Account for navbar height + offset
+      // DOM section IDs to track
+      const spySectionIds = [
+        "projects",
+        "stack",
+        "lab",
+        "timeline",
+        "github",
+        "ai-assistant",
+        "resume",
+        "contact"
+      ];
+      
+      const scrollPosition = currentScrollY + 140; // Account for navbar height + buffer
 
-      let currentActive = "";
-      sections.forEach((section) => {
-        if (section && section.offsetTop <= scrollPosition) {
-          currentActive = section.id;
+      let detectedId = "";
+      spySectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollPosition) {
+          detectedId = id;
         }
       });
+
+      // Map detected section IDs to nav menu item IDs
+      let currentActive = "";
+      if (detectedId === "projects") {
+        currentActive = "projects";
+      } else if (detectedId === "stack") {
+        currentActive = "stack";
+      } else if (detectedId === "lab") {
+        currentActive = "lab";
+      } else if (detectedId === "timeline") {
+        currentActive = "timeline";
+      } else if (detectedId === "github" || detectedId === "ai-assistant" || detectedId === "resume") {
+        currentActive = "systems";
+      } else if (detectedId === "contact") {
+        currentActive = "contact";
+      }
 
       // Explicitly clear hero section
       if (currentScrollY < 100) {
@@ -121,7 +150,9 @@ export default function Navbar() {
     
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     
-    const el = document.getElementById(id);
+    // Map systems clicked state to scroll target
+    const targetId = id === "systems" ? "github" : id;
+    const el = document.getElementById(targetId);
     if (el) {
       if ((window as any).lenis) {
         (window as any).lenis.scrollTo(el);
