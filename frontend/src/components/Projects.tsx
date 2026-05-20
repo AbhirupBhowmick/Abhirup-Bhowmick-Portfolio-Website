@@ -8,22 +8,22 @@ const projects = [
     title: "Visi Core AI",
     description: "Real-Time Multimodal Vision Intelligence Platform. Built deterministic prompt pipelines for reliable AI outputs and implemented real-time SSE streaming architecture.",
     stack: ["NEXT.JS", "REACT", "VERCEL AI SDK"],
-    link: "#",
-    github: "#",
+    link: "https://visi-core-ai.vercel.app/",
+    github: "https://github.com/AbhirupBhowmick/VisiCore-AI",
   },
   {
     title: "ResuMatch AI",
     description: "AI-Powered Resume Intelligence SaaS Platform. Implemented secure REST APIs, Razorpay webhook integrations, and an AI-driven resume-to-job-description matching system.",
     stack: ["SPRING BOOT", "POSTGRESQL", "REST API"],
-    link: "#",
-    github: "#",
+    link: "https://resu-match-ai-eight.vercel.app/",
+    github: "https://github.com/AbhirupBhowmick/ResuMatch-AI",
   },
   {
     title: "Second Brain AI",
     description: "Distributed Knowledge Graph & Retrieval System. Implemented graph-based semantic knowledge traversal and designed context-aware AI assistant workflows.",
     stack: ["REACT", "NEO4J", "DOCKER", "RAG"],
-    link: "#",
-    github: "#",
+    link: "https://second-brain-ai-psi.vercel.app/",
+    github: "https://github.com/AbhirupBhowmick/Second-Brain-AI",
   }
 ];
 
@@ -55,11 +55,23 @@ export default function Projects() {
                   <h3 className="text-xl font-bold text-white group-hover:text-gray-200 transition-colors">
                     {project.title}
                   </h3>
-                  <div className="flex items-center gap-3 text-gray-500">
-                    <a href={project.github} className="hover:text-white transition-colors">
+                  <div className="project-actions">
+                    <a 
+                      href={project.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="project-icon"
+                      aria-label={`${project.title} GitHub Repository`}
+                    >
                       <GitBranch size={16} />
                     </a>
-                    <a href={project.link} className="hover:text-white transition-colors">
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="project-icon"
+                      aria-label={`${project.title} Live Demo`}
+                    >
                       <ExternalLink size={16} />
                     </a>
                   </div>
