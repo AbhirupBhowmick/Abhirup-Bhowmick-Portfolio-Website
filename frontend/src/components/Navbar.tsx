@@ -31,6 +31,20 @@ export default function Navbar() {
   const lastScrollTime = useRef(Date.now());
   const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0, scaleX: 1 });
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
 
   useEffect(() => {
     const activeIndex = navItems.findIndex(item => item.id === activeSection);
@@ -53,9 +67,10 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isManualScrolling.current) return;
-
       const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 20);
+
+      if (isManualScrolling.current) return;
       const currentTime = Date.now();
       const timeDiff = currentTime - lastScrollTime.current;
       const scrollDiff = currentScrollY - lastScrollY.current;
@@ -126,7 +141,7 @@ export default function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 inset-x-0 z-50 h-20 px-8 lg:px-12 bg-black/30 backdrop-blur-md border-b border-white/5 shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.02)] flex items-center pointer-events-auto"
+      className={`fixed top-0 inset-x-0 z-50 h-20 px-8 lg:px-12 transition-all duration-300 flex items-center pointer-events-auto ${scrolled || isOpen ? 'bg-black/80 backdrop-blur-lg border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.4),inset_0_-1px_0_0_rgba(255,255,255,0.02)]' : 'bg-black/30 backdrop-blur-md border-b border-white/5 shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.02)]'}`}
     >
       <div className="max-w-[1400px] w-full mx-auto flex items-center justify-between">
         <a 
@@ -179,7 +194,7 @@ export default function Navbar() {
           />
         </nav>
         
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-5 mr-2">
             <a href="https://github.com/AbhirupBhowmick" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors duration-300">
               <GithubIcon size={18} />
@@ -194,15 +209,117 @@ export default function Navbar() {
               size="sm" 
               onClick={(e) => {
                 e.preventDefault();
-                document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
+                const el = document.querySelector('#contact');
+                if (el) {
+                  if ((window as any).lenis) {
+                    (window as any).lenis.scrollTo(el);
+                  } else {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }
               }}
               className="hidden md:flex text-xs tracking-widest uppercase font-semibold border border-white/10 text-gray-300 backdrop-blur-md bg-white/[0.02] hover:bg-white/[0.05] hover:text-white hover:border-white/20 hover:shadow-[0_0_15px_rgba(255,255,255,0.05),inset_0_1px_0_0_rgba(255,255,255,0.05)] rounded-sm px-6 h-10 transition-all"
             >
               CONNECT
             </Button>
           </MagneticButton>
+
+          {/* Mobile Hamburger Toggle */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden flex flex-col items-end justify-center w-10 h-10 gap-1.5 focus:outline-none z-50 relative cursor-pointer"
+            aria-label="Toggle Menu"
+          >
+            <motion.span
+              animate={isOpen ? { rotate: 45, y: 4.5, width: "20px" } : { rotate: 0, y: 0, width: "20px" }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="h-[1px] bg-white/90"
+            />
+            <motion.span
+              animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="w-4 h-[1px] bg-white/90 origin-right"
+            />
+            <motion.span
+              animate={isOpen ? { rotate: -45, y: -4.5, width: "20px" } : { rotate: 0, y: 0, width: "12px" }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="h-[1px] bg-white/90"
+            />
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col justify-center px-8 md:hidden"
+          >
+            {/* Dynamic background lighting for subtle atmospheric depth */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+              <div className="absolute -top-[30%] -left-[10%] w-[70%] h-[70%] rounded-full bg-gradient-to-br from-indigo-500/10 via-slate-500/5 to-transparent blur-[120px]" />
+            </div>
+
+            <nav className="flex flex-col gap-6 text-left max-w-md mx-auto w-full">
+              {navItems.map((item, index) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <motion.div
+                    key={item.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 15 }}
+                    transition={{ duration: 0.4, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <Link
+                      href={`#${item.id}`}
+                      onClick={(e) => {
+                        handleNavClick(e, item.id);
+                        setIsOpen(false);
+                      }}
+                      className="relative py-2 text-2xl font-bold tracking-widest text-white/40 hover:text-white transition-all uppercase flex items-center gap-4 group"
+                    >
+                      {/* Active Indicator inside mobile menu */}
+                      <span className={`w-1.5 h-1.5 rounded-full bg-white transition-transform duration-300 ${isActive ? 'scale-100' : 'scale-0'}`} />
+                      <span className={`transition-all duration-300 ${isActive ? 'text-white translate-x-2' : 'hover:translate-x-1'}`}>
+                        {item.name}
+                      </span>
+                      <span className="text-[10px] font-mono text-white/20 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        // 0{index + 1}
+                      </span>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </nav>
+            
+            {/* Mobile Footer/Utility Links inside Overlay */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute bottom-10 left-8 right-8 flex items-center justify-between border-t border-white/5 pt-6 max-w-md mx-auto w-[calc(100%-4rem)]"
+            >
+              <div className="flex gap-6">
+                <a href="https://github.com/AbhirupBhowmick" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors duration-300 text-xs font-semibold tracking-widest flex items-center gap-2">
+                  <GithubIcon size={14} /> GITHUB
+                </a>
+                <a href="https://www.linkedin.com/in/abhirup111" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors duration-300 text-xs font-semibold tracking-widest flex items-center gap-2">
+                  <LinkedinIcon size={14} /> LINKEDIN
+                </a>
+              </div>
+              <div className="text-[10px] font-mono text-white/20">
+                SYS_ACTIVE // v2.0
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }
