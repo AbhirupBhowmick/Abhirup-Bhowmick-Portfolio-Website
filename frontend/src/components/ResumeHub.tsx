@@ -147,7 +147,7 @@ export default function ResumeHub() {
       {/* Background ambient lighting */}
       <div className="absolute top-[10%] right-[20%] w-[500px] h-[250px] bg-indigo-500/[0.01] rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-12">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
         
         {/* Section Header */}
         <div className="mb-16">

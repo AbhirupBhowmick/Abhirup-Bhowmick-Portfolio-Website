@@ -173,9 +173,9 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 inset-x-0 z-50 h-20 px-8 lg:px-12 transition-all duration-300 flex items-center pointer-events-auto ${scrolled ? 'bg-black/80 backdrop-blur-lg border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.4),inset_0_-1px_0_0_rgba(255,255,255,0.02)]' : 'bg-black/30 backdrop-blur-md border-b border-white/5 shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.02)]'}`}
+        className={`fixed top-0 inset-x-0 z-50 h-16 md:h-20 px-4 sm:px-6 lg:px-12 transition-all duration-300 flex items-center pointer-events-auto ${scrolled ? 'bg-black/80 backdrop-blur-lg border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.4),inset_0_-1px_0_0_rgba(255,255,255,0.02)]' : 'bg-black/30 backdrop-blur-md border-b border-white/5 shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.02)]'}`}
       >
-        <div className="max-w-[1400px] w-full mx-auto flex items-center justify-between">
+        <div className="max-w-[1400px] w-full mx-auto flex items-center justify-between overflow-hidden">
           <a 
             href="#"
             onClick={(e) => {
@@ -192,9 +192,9 @@ export default function Navbar() {
                 isManualScrolling.current = false;
               }, 1300);
             }} 
-            className="flex items-center gap-2 group cursor-pointer"
+            className="flex items-center gap-2 group cursor-pointer min-w-0"
           >
-            <span className="font-bold tracking-widest text-white/90 group-hover:text-white transition-colors duration-300 text-sm md:text-base">
+            <span className="font-bold tracking-widest text-white/90 group-hover:text-white transition-colors duration-300 text-xs sm:text-sm md:text-base truncate">
               ABHIRUP BHOWMICK
             </span>
           </a>
@@ -290,10 +290,10 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[60] bg-black/98 backdrop-blur-2xl flex flex-col justify-center px-8 md:hidden w-screen h-screen"
+            className="fixed inset-0 z-[60] bg-black/98 backdrop-blur-2xl flex flex-col justify-center px-8 md:hidden w-full h-full"
           >
             {/* Dedicated Mobile Header inside Overlay */}
-            <div className="absolute top-0 inset-x-0 h-20 px-8 flex items-center justify-between border-b border-white/5 bg-black/20">
+            <div className="absolute top-0 inset-x-0 h-16 px-4 sm:px-6 flex items-center justify-between border-b border-white/5 bg-black/20">
               <span className="font-bold tracking-widest text-white/90 text-sm">
                 ABHIRUP BHOWMICK
               </span>
@@ -351,7 +351,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute bottom-10 left-8 right-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-white/5 pt-6 max-w-md mx-auto w-[calc(100%-4rem)]"
+              className="absolute bottom-8 left-4 right-4 sm:left-8 sm:right-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-white/5 pt-6"
             >
               <div className="flex gap-6">
                 <a href="https://github.com/AbhirupBhowmick" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors duration-300 text-xs font-semibold tracking-widest flex items-center gap-2">

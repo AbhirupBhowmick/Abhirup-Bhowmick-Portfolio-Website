@@ -147,7 +147,7 @@ export default function GitHubActivity() {
   if (error) {
     return (
       <section id="github" className="py-24 relative border-t border-white/5 bg-[#09090b]">
-        <div className="max-w-[1400px] mx-auto px-8 lg:px-12">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
           <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="max-w-2xl">
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
@@ -180,7 +180,7 @@ export default function GitHubActivity() {
       {/* Background aurora blur for ambient depth */}
       <div className="absolute top-[20%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-indigo-500/[0.02] rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-12">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
         
         {/* Section Header */}
         <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -210,7 +210,7 @@ export default function GitHubActivity() {
         {/* Dashboard Grid */}
         {isLoading ? (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-7 p-8 bg-[#111113] border border-white/5 rounded-sm h-[400px] animate-pulse flex flex-col gap-6">
+            <div className="lg:col-span-7 p-5 sm:p-8 bg-[#111113] border border-white/5 rounded-sm h-[400px] animate-pulse flex flex-col gap-6">
               <div className="h-6 w-1/3 bg-white/5 rounded-md" />
               <div className="space-y-4">
                 {[1, 2, 3].map((n) => (
@@ -218,7 +218,7 @@ export default function GitHubActivity() {
                 ))}
               </div>
             </div>
-            <div className="lg:col-span-5 p-8 bg-[#111113] border border-white/5 rounded-sm h-[400px] animate-pulse flex flex-col gap-6">
+            <div className="lg:col-span-5 p-5 sm:p-8 bg-[#111113] border border-white/5 rounded-sm h-[400px] animate-pulse flex flex-col gap-6">
               <div className="h-6 w-1/3 bg-white/5 rounded-md" />
               <div className="space-y-6">
                 {[1, 2, 3, 4].map((n) => (
@@ -243,7 +243,7 @@ export default function GitHubActivity() {
               {/* CARD 1: RECENT REPOSITORIES */}
               <motion.div 
                 variants={cardVariants}
-                className="lg:col-span-7 p-8 bg-[#111113] border border-white/5 rounded-sm hover:border-white/10 transition-colors flex flex-col justify-between"
+                className="lg:col-span-7 p-5 sm:p-8 bg-[#111113] border border-white/5 rounded-sm hover:border-white/10 transition-colors flex flex-col justify-between"
               >
                 <div>
                   <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-2 pb-4 border-b border-white/5">
@@ -311,7 +311,7 @@ export default function GitHubActivity() {
               {/* CARD 3: LANGUAGES USED */}
               <motion.div 
                 variants={cardVariants}
-                className="lg:col-span-5 p-8 bg-[#111113] border border-white/5 rounded-sm hover:border-white/10 transition-colors flex flex-col justify-between"
+                className="lg:col-span-5 p-5 sm:p-8 bg-[#111113] border border-white/5 rounded-sm hover:border-white/10 transition-colors flex flex-col justify-between"
               >
                 <div>
                   <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-2 pb-4 border-b border-white/5">
@@ -348,7 +348,7 @@ export default function GitHubActivity() {
               {/* CARD 2: CONTRIBUTION ACTIVITY */}
               <motion.div 
                 variants={cardVariants}
-                className="lg:col-span-7 p-8 bg-[#111113] border border-white/5 rounded-sm hover:border-white/10 transition-colors flex flex-col justify-between"
+                className="lg:col-span-7 p-5 sm:p-8 bg-[#111113] border border-white/5 rounded-sm hover:border-white/10 transition-colors flex flex-col justify-between"
               >
                 <div>
                   <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-2 pb-4 border-b border-white/5">
@@ -441,7 +441,7 @@ export default function GitHubActivity() {
               {/* CARD 4: OPEN SOURCE & COLLABORATION */}
               <motion.div 
                 variants={cardVariants}
-                className="lg:col-span-5 p-8 bg-[#111113] border border-white/5 rounded-sm hover:border-white/10 transition-colors flex flex-col justify-between"
+                className="lg:col-span-5 p-5 sm:p-8 bg-[#111113] border border-white/5 rounded-sm hover:border-white/10 transition-colors flex flex-col justify-between"
               >
                 <div>
                   <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-2 pb-4 border-b border-white/5">

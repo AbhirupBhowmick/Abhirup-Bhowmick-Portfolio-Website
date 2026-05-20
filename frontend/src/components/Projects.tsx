@@ -30,7 +30,7 @@ const projects = [
 export default function Projects() {
   return (
     <section id="projects" className="py-24 relative border-t border-white/5 bg-[#09090b]">
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-12">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
         <div className="mb-16">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
             Projects Universe
@@ -48,7 +48,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className={`p-8 bg-[#111113] border border-white/5 hover:border-white/10 transition-all flex flex-col justify-between min-h-[280px] group ${idx === 0 ? 'lg:col-span-2' : ''}`}
+              className={`p-6 sm:p-8 bg-[#111113] border border-white/5 hover:border-white/10 transition-all flex flex-col justify-between min-h-[280px] group ${idx === 0 ? 'lg:col-span-2' : ''}`}
             >
               <div>
                 <div className="flex items-start justify-between mb-4">

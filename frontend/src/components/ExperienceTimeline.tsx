@@ -47,7 +47,7 @@ const timelineItems = [
 export default function ExperienceTimeline() {
   return (
     <section id="timeline" className="py-24 relative border-t border-white/5 bg-[#09090b]">
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-12">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
         <div className="mb-20 max-w-2xl">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
             Experience Timeline

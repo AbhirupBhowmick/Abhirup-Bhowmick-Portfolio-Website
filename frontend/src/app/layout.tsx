@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -6,6 +6,13 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
 
 export const metadata: Metadata = {
   title: "Abhirup Bhowmick | AI Systems & Software Engineer",
@@ -44,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} antialiased dark`} style={{ scrollBehavior: 'smooth' }}>
-      <body className="bg-[#09090b] text-gray-100 min-h-screen flex flex-col selection:bg-white/10 selection:text-white relative">
+      <body className="bg-[#09090b] text-gray-100 min-h-screen flex flex-col selection:bg-white/10 selection:text-white relative overflow-x-hidden">
         <SmoothScroll>
           <AuroraBackground />
           <EngineeringGrid />

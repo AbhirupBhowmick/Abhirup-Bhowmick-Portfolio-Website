@@ -406,7 +406,7 @@ export default function AIAssistant() {
 
   return (
     <section id="ai-assistant" className="py-24 relative border-t border-white/5 bg-[#09090b]">
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-12 flex flex-col lg:flex-row gap-12 lg:items-center">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12 flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-center">
         
         {/* Left Side Info Panel */}
         <div className="lg:w-1/3">
@@ -441,7 +441,7 @@ export default function AIAssistant() {
           <motion.div 
             animate={isActive ? { scale: [1, 1.01, 1], borderColor: ["rgba(255,255,255,0.1)", "rgba(16,185,129,0.5)", "rgba(255,255,255,0.1)"] } : {}}
             transition={{ duration: 0.8 }}
-            className={`backdrop-blur-md bg-black/30 border ${isActive ? 'border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.1),inset_0_1px_0_0_rgba(255,255,255,0.05)]' : 'border-white/10 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.02)]'} rounded-sm overflow-hidden flex flex-col h-[420px] transition-all duration-500`}
+            className={`backdrop-blur-md bg-black/30 border ${isActive ? 'border-emerald-500/50 shadow-[0_0_30px_rgba(16,185,129,0.1),inset_0_1px_0_0_rgba(255,255,255,0.05)]' : 'border-white/10 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5),inset_0_1px_0_0_rgba(255,255,255,0.02)]'} rounded-sm overflow-hidden flex flex-col h-[340px] sm:h-[420px] transition-all duration-500`}
           >
             {/* Terminal Header */}
             <div className="h-10 bg-white/[0.02] border-b border-white/5 flex items-center px-4 justify-between select-none">

@@ -206,7 +206,7 @@ export default function Skills() {
 
   return (
     <section id="stack" className="py-24 relative bg-[#09090b]">
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-12">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
         <div className="mb-16">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
             Skills Galaxy & Architecture
@@ -239,7 +239,7 @@ export default function Skills() {
             </div>
 
             {/* React Flow Container */}
-            <div className="flex-1 w-full min-h-[380px] relative">
+            <div className="flex-1 w-full min-h-[260px] sm:min-h-[380px] relative">
               <ReactFlow
                 nodes={nodes}
                 edges={edges}

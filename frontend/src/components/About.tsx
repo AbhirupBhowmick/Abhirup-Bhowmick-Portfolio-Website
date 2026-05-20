@@ -6,7 +6,7 @@ import { Briefcase, Trophy, Code2 } from "lucide-react";
 export default function About() {
   return (
     <section id="about" className="py-24 relative border-t border-white/5 bg-[#09090b]">
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-12">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
         <div className="max-w-3xl mb-16">
           <h2 className="text-sm font-semibold tracking-widest text-gray-400 uppercase mb-4">
             // Professional Identity

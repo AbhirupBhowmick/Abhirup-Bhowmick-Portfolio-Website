@@ -101,10 +101,10 @@ export default function ContactPortal() {
       console.error(err);
       setTerminalLogs(prev => [
         ...prev, 
-        "system~ Transmission failed.",
-        `system~ Error: ${err.message}`
+        "system~ Secure relay failed.",
+        "system~ Retry transmission."
       ]);
-      setErrorMessage(err.message || "Secure relay timeout detected.");
+      setErrorMessage("system~ Secure relay failed. Retry transmission.");
       await new Promise(r => setTimeout(r, 800));
       setStatus("failed");
     }
@@ -129,7 +129,7 @@ export default function ContactPortal() {
     <section id="contact" className="py-24 relative border-t border-white/5 bg-[#09090b]">
       <div className="absolute bottom-[10%] left-[10%] w-[400px] h-[200px] bg-indigo-500/[0.01] rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-[1400px] mx-auto px-8 lg:px-12">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
         
         {/* Section Title */}
         <div className="mb-16">
@@ -149,7 +149,7 @@ export default function ContactPortal() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-8 bg-[#111113] border border-white/5 p-8 shadow-2xl flex flex-col relative rounded-sm min-h-[460px] justify-between"
+            className="lg:col-span-8 bg-[#111113] border border-white/5 p-5 sm:p-8 shadow-2xl flex flex-col relative rounded-sm min-h-[460px] justify-between"
           >
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-gray-800 via-gray-600 to-gray-800 opacity-20" />
             
