@@ -194,7 +194,7 @@ export default function AIAssistant() {
     playBoot();
   }, []);
 
-  // Listen to remote focus calls
+  // Listen to remote focus and query execution calls
   useEffect(() => {
     const handleFocus = () => {
       setIsActive(true);
@@ -204,9 +204,22 @@ export default function AIAssistant() {
       setTimeout(() => setIsActive(false), 2000);
     };
 
+    const handleExecuteQuery = (e: Event) => {
+      const customEvent = e as CustomEvent<{ query: string }>;
+      if (customEvent.detail?.query) {
+        setIsActive(true);
+        handleExecuteCommand(customEvent.detail.query);
+        setTimeout(() => setIsActive(false), 2000);
+      }
+    };
+
     window.addEventListener('focus-ai-terminal', handleFocus);
-    return () => window.removeEventListener('focus-ai-terminal', handleFocus);
-  }, []);
+    window.addEventListener('execute-ai-query', handleExecuteQuery);
+    return () => {
+      window.removeEventListener('focus-ai-terminal', handleFocus);
+      window.removeEventListener('execute-ai-query', handleExecuteQuery);
+    };
+  }, [isStreaming]);
 
   // Streaming text animation engine
   const streamLines = async (lines: string[]) => {
