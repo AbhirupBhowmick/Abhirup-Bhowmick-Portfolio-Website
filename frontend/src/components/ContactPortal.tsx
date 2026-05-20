@@ -55,56 +55,80 @@ export default function ContactPortal() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (status === "sending") return;
+    console.log("[CONTACT_FORM] FORM SUBMITTED");
 
-    // Simple validation
+    if (status === "sending") {
+      console.warn("[CONTACT_FORM] Already sending — ignoring duplicate submit.");
+      return;
+    }
+
+    // Client-side validation
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      console.warn("[CONTACT_FORM] Validation failed — missing required fields.");
       setErrorMessage("Required fields (Name, Email, Message) must be filled.");
       setStatus("failed");
       return;
     }
 
+    console.log("[CONTACT_FORM] Payload:", JSON.stringify({
+      name: form.name,
+      email: form.email,
+      subject: form.subject,
+      customSubject: form.customSubject,
+      message: form.message.slice(0, 50) + "..."
+    }));
+
     setStatus("sending");
     setErrorMessage("");
 
-    // Start UI logging timeline
+    // Start UI animation
     const logPromise = runTransmissionSequence();
 
     try {
+      console.log("[CONTACT_FORM] Fetching POST /api/contact...");
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
+        body: JSON.stringify(form),
       });
 
-      const result = await response.json();
-      await logPromise; // Ensure animations sync cleanly
+      console.log("[CONTACT_FORM] Response status:", response.status, response.statusText);
 
-      if (response.ok && result.success) {
+      let result: any;
+      try {
+        result = await response.json();
+        console.log("[CONTACT_FORM] Response body:", JSON.stringify(result));
+      } catch (jsonErr) {
+        console.error("[CONTACT_FORM] Failed to parse response JSON:", jsonErr);
+        throw new Error("Server returned an unreadable response.");
+      }
+
+      // Ensure animation completes before state transition
+      await logPromise;
+
+      if (response.ok && result?.success) {
+        console.log("[CONTACT_FORM] SUCCESS — email dispatched. Resend ID:", result.id);
         setTerminalLogs(prev => [
-          ...prev, 
+          ...prev,
           "system~ Payload delivered successfully.",
-          "system~ Secure communication node established."
+          "system~ Secure communication node established.",
         ]);
         await new Promise(r => setTimeout(r, 800));
         setStatus("success");
-        
-        // Dispatch success signal to AI Context Engine terminal
-        const event = new CustomEvent("execute-ai-query", { 
-          detail: { query: 'system~ Secure communication channel established.' } 
-        });
-        window.dispatchEvent(event);
       } else {
-        throw new Error(result.error || "Secure relay timeout detected.");
+        const errMsg = result?.error || `HTTP ${response.status}: ${response.statusText}`;
+        console.error("[CONTACT_FORM] API returned failure:", errMsg);
+        throw new Error(errMsg);
       }
     } catch (err: any) {
-      console.error(err);
+      console.error("[CONTACT_FORM] CATCH block error:", err?.message || err);
+      await logPromise;
       setTerminalLogs(prev => [
-        ...prev, 
+        ...prev,
         "system~ Secure relay failed.",
-        "system~ Retry transmission."
+        "system~ Retry transmission.",
       ]);
-      setErrorMessage("system~ Secure relay failed. Retry transmission.");
+      setErrorMessage(err?.message || "system~ Secure relay failed. Retry transmission.");
       await new Promise(r => setTimeout(r, 800));
       setStatus("failed");
     }
