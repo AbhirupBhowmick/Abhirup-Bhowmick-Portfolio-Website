@@ -86,6 +86,7 @@ export default function AIAssistant() {
               <div className="relative flex items-center">
                 <Command size={14} className="absolute left-3 text-gray-500" />
                 <input 
+                  id="ai-terminal-input"
                   ref={inputRef}
                   type="text" 
                   value={input}

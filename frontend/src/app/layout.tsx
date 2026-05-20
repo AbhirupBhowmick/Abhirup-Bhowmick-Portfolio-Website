@@ -8,8 +8,26 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Software Engineer | Portfolio",
-  description: "Premium engineering portfolio showcasing skills, projects, and experience.",
+  title: "Abhirup Bhowmick | AI Systems & Software Engineer",
+  description: "Systems Engineer specializing in distributed knowledge graphs, RAG architecture, and production-grade software intelligence.",
+  keywords: ["Abhirup Bhowmick", "Software Engineer", "Systems Engineer", "AI Engineer", "Next.js", "Spring Boot", "React Flow", "RAG", "Portfolio"],
+  authors: [{ name: "Abhirup Bhowmick" }],
+  openGraph: {
+    title: "Abhirup Bhowmick | AI Systems & Software Engineer",
+    description: "Systems Engineer specializing in distributed knowledge graphs, RAG architecture, and production-grade software intelligence.",
+    url: "https://abhirup-bhowmick-portfolio-website.vercel.app",
+    siteName: "Abhirup Bhowmick Portfolio",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Abhirup Bhowmick | AI Systems & Software Engineer",
+    description: "Systems Engineer specializing in distributed knowledge graphs, RAG architecture, and production-grade software intelligence.",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  }
 };
 
 import SmoothScroll from "@/components/SmoothScroll";
