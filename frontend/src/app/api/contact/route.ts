@@ -3,8 +3,32 @@ import { Resend } from "resend";
 
 export const runtime = "nodejs";
 
+// In-memory rate limit registry tracking client IPs
+const rateLimitMap = new Map<string, number>();
+const RATE_LIMIT_COOLDOWN = 30000; // 30 seconds cooldown
+
 export async function POST(req: Request) {
   console.log("[API_CONTACT] === REQUEST RECEIVED ===");
+
+  // ─── Rate Limiting ──────────────────────────────────────────────────────────
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "127.0.0.1";
+  const lastRequestTime = rateLimitMap.get(ip);
+  const now = Date.now();
+
+  if (lastRequestTime && now - lastRequestTime < RATE_LIMIT_COOLDOWN) {
+    const timeRemaining = Math.ceil((RATE_LIMIT_COOLDOWN - (now - lastRequestTime)) / 1000);
+    console.warn(`[API_CONTACT][RATE_LIMIT] Blocked request from IP ${ip}. Time remaining: ${timeRemaining}s`);
+    return NextResponse.json(
+      { 
+        success: false, 
+        error: `Rate limit active. Please wait ${timeRemaining} seconds before submitting again.` 
+      }, 
+      { status: 429 }
+    );
+  }
+
+  // Update request timestamp
+  rateLimitMap.set(ip, now);
 
   try {
     // ─── Parse body ────────────────────────────────────────────────────────────
@@ -58,18 +82,21 @@ export async function POST(req: Request) {
       );
     }
 
+    // ─── Recipient Email Resolution ─────────────────────────────────────────────
+    const receiverEmail = process.env.RECEIVER_EMAIL || process.env.RESEND_TO_EMAIL || "abhirupbhowmick111777@gmail.com";
+
     // ─── Send via Resend ────────────────────────────────────────────────────────
     const resend = new Resend(apiKey);
     const dateStr = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
 
     console.log("[API_CONTACT] Sending email via Resend...");
     console.log("[API_CONTACT] From: Portfolio Contact <onboarding@resend.dev>");
-    console.log("[API_CONTACT] To: abhirupbhowmick111777@gmail.com");
+    console.log(`[API_CONTACT] To: ${receiverEmail}`);
     console.log("[API_CONTACT] Subject:", `[PORTFOLIO] ${finalSubject} — ${name}`);
 
     const { data, error } = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: ["abhirupbhowmick111777@gmail.com"],
+      to: [receiverEmail],
       replyTo: email,
       subject: `[PORTFOLIO] ${finalSubject} — ${name}`,
       html: `

@@ -62,6 +62,22 @@ export default function ContactPortal() {
       return;
     }
 
+    // Client-side rate limiting / cooldown check
+    const lastSend = localStorage.getItem("portfolio_last_contact_ts");
+    const now = Date.now();
+    const COOLDOWN_TIME = 30000; // 30 seconds
+
+    if (lastSend) {
+      const elapsed = now - parseInt(lastSend, 10);
+      if (elapsed < COOLDOWN_TIME) {
+        const remaining = Math.ceil((COOLDOWN_TIME - elapsed) / 1000);
+        console.warn(`[CONTACT_FORM] Cooldown active. Wait ${remaining}s.`);
+        setErrorMessage(`system~ Rate limit lock active. Please wait ${remaining} seconds.`);
+        setStatus("failed");
+        return;
+      }
+    }
+
     // Client-side validation
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       console.warn("[CONTACT_FORM] Validation failed — missing required fields.");
@@ -108,6 +124,10 @@ export default function ContactPortal() {
 
       if (response.ok && result?.success) {
         console.log("[CONTACT_FORM] SUCCESS — email dispatched. Resend ID:", result.id);
+        
+        // Save send timestamp for rate limiting cooldown
+        localStorage.setItem("portfolio_last_contact_ts", Date.now().toString());
+
         setTerminalLogs(prev => [
           ...prev,
           "system~ Payload delivered successfully.",
