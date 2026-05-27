@@ -7,14 +7,23 @@ export default function About() {
   return (
     <section id="about" className="py-24 relative border-t border-white/5 bg-[#09090b]">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-12">
-        <div className="max-w-3xl mb-16">
-          <h2 className="text-sm font-semibold tracking-widest text-gray-400 uppercase mb-4">
-            // Professional Identity
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-light">
-            I am an engineer focused on building robust, scalable systems and modern AI integrations. 
-            My background spans full-stack product development and high-performance backend architecture.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-center gap-6 mb-16">
+          <div className="relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-full overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-500">
+            <img 
+              src="/portrait.png" 
+              alt="Abhirup Bhowmick" 
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+          </div>
+          <div className="max-w-2xl">
+            <h2 className="text-sm font-semibold tracking-widest text-gray-400 uppercase mb-3">
+              // Professional Identity
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-light">
+              AI systems engineer focused on scalable backend architecture, intelligent interfaces, and production-grade engineering experiences.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

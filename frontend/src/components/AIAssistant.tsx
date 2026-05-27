@@ -138,17 +138,88 @@ const SPECIFIC_QUERIES: Record<string, string[]> = {
     "",
     "Competency: Spring Boot Backend Development",
     "→ Architected enterprise RESTful web microservices and data ingest pipelines.",
-    "→ Secured services with OAuth2, JWT tokens, and spring security filters.",
+    "→ Secured services with OAuth2, JWT tokens, and Spring Security filters.",
     "→ Integrated relational (PostgreSQL) and graph (Neo4j) database persistence layers."
+  ],
+  "skill-react": [
+    "system~ Searching semantic graph...",
+    "system~ Retrieving frontend telemetry...",
+    "system~ Confidence: 97.2%",
+    "",
+    "Competency: React & Next.js Frontend Topologies",
+    "→ Designed modular client interface components with performance-optimized renders.",
+    "→ Integrated global states and dynamic data fetching using SWR caching layers.",
+    "→ Engineered responsive viewport containers, scroll animations, and clean hydration."
+  ],
+  "skill-typescript": [
+    "system~ Searching semantic graph...",
+    "system~ Verifying static typings...",
+    "system~ Confidence: 98.4%",
+    "",
+    "Competency: TypeScript Static Typing",
+    "→ Implemented compile-time type safety across modular frontend and backend projects.",
+    "→ Defined robust domain models, request/response DTO boundaries, and strict type guards.",
+    "→ Eliminated production runtime exceptions through systematic static code analysis."
+  ],
+  "skill-neo4j": [
+    "system~ Searching semantic graph...",
+    "system~ Accessing graph schema registry...",
+    "system~ Confidence: 99.1%",
+    "",
+    "Competency: Neo4j Graph Database Modeling",
+    "→ Formulated optimized Cypher queries for complex multi-hop relational path traversals.",
+    "→ Designed schema topologies to map concept relations in dynamic knowledge graphs.",
+    "→ Implemented transactional database persistence connectors in Java and Python."
+  ],
+  "skill-postgres": [
+    "system~ Searching semantic graph...",
+    "system~ Inspecting relational schemas...",
+    "system~ Confidence: 96.5%",
+    "",
+    "Competency: PostgreSQL Relational Databases",
+    "→ Designed structured relational models, constraints, and indexes for data integrity.",
+    "→ Optimized high-throughput SQL queries, joins, and transactional operations.",
+    "→ Configured connection pooling and secure environment integration."
+  ],
+  "skill-docker": [
+    "system~ Searching semantic graph...",
+    "system~ Loading container configurations...",
+    "system~ Confidence: 94.9%",
+    "",
+    "Competency: Docker Containerization",
+    "→ Built high-fidelity, multi-stage Dockerfiles for frontend and backend microservices.",
+    "→ Optimized image sizes, build caches, and configured multi-service docker-compose networks.",
+    "→ Ensured environment parity from local development environments to cloud runtimes."
+  ],
+  "skill-rag": [
+    "system~ Searching semantic graph...",
+    "system~ Querying retrieval pipeline stats...",
+    "system~ Confidence: 98.6%",
+    "",
+    "Competency: RAG & LLM Orchestration",
+    "→ Developed Retrieval-Augmented Generation (RAG) pipelines for contextual prompt delivery.",
+    "→ Integrated semantic vector searches with custom LLM client wrappers.",
+    "→ Programmed semantic validation and output structure layers to prevent hallucinations."
   ],
   "role-ideas": [
     "system~ Querying institutional archive...",
     "system~ Retrieving engineering logs...",
     "",
-    "Professional Role: AI Developer Intern @ IDEAS-TIH (ISI Kolkata)",
-    "→ Engineered custom RAG pipelines using LangChain and Neo4j databases.",
+    "Professional Role: Technical Engineering Associate @ IDEAS-TIH (ISI Kolkata)",
+    "→ Period: Dec 2024 - Present (Ongoing)",
+    "→ Engineered scalable backend services and analytics pipelines for enterprise systems.",
     "→ Created hierarchical semantic knowledge graphs representing academic profiles.",
     "→ Built optimized Cypher queries to perform multi-hop relational path searches."
+  ],
+  "role-gameonix": [
+    "system~ Querying institutional archive...",
+    "system~ Retrieving engineering logs...",
+    "",
+    "Professional Role: Software Development Intern @ Gameonix",
+    "→ Period: Jul 2024 - Sep 2024 (Completed)",
+    "→ Developed responsive frontend topologies integrated with scalable backend REST services.",
+    "→ Collaborated in Agile cycles to improve overall application reliability and system uptime.",
+    "→ Discovered and resolved critical rendering and layout bottlenecks across high-performance dashboards."
   ],
   "focus-ai": [
     "system~ Retrieving core philosophy node...",
@@ -227,20 +298,29 @@ export default function AIAssistant() {
     for (const line of lines) {
       const isSystemLog = line.startsWith("system~");
       
+      // Strip "system~" prefix from the text to stream, to avoid duplicate rendering
+      let contentToStream = line;
+      if (isSystemLog) {
+        contentToStream = line.substring(7);
+        if (contentToStream.startsWith(" ")) {
+          contentToStream = contentToStream.substring(1);
+        }
+      }
+      
       // Append a placeholder row
       setTerminalLogs(prev => [...prev, { type: isSystemLog ? "system" : "output", text: "" }]);
       
-      if (line.length === 0) {
+      if (contentToStream.length === 0) {
         await new Promise(resolve => setTimeout(resolve, 80));
         continue;
       }
 
       let currentText = "";
       // Adjust speed dynamically based on line size
-      const charDelay = line.length > 60 ? 1 : 5;
+      const charDelay = contentToStream.length > 60 ? 1 : 5;
       
-      for (let i = 0; i < line.length; i++) {
-        currentText += line[i];
+      for (let i = 0; i < contentToStream.length; i++) {
+        currentText += contentToStream[i];
         setTerminalLogs(prev => {
           const next = [...prev];
           next[next.length - 1] = { 
@@ -328,6 +408,18 @@ export default function AIAssistant() {
       } else if (type === "skill" || type === "skills") {
         if (value.includes("spring") || value.includes("boot") || value.includes("java")) {
           await streamLines(SPECIFIC_QUERIES["skill-springboot"]);
+        } else if (value.includes("react") || value.includes("next")) {
+          await streamLines(SPECIFIC_QUERIES["skill-react"]);
+        } else if (value.includes("typescript") || value.includes("js") || value.includes("javascript")) {
+          await streamLines(SPECIFIC_QUERIES["skill-typescript"]);
+        } else if (value.includes("neo4j") || value.includes("graph")) {
+          await streamLines(SPECIFIC_QUERIES["skill-neo4j"]);
+        } else if (value.includes("postgres") || value.includes("sql")) {
+          await streamLines(SPECIFIC_QUERIES["skill-postgres"]);
+        } else if (value.includes("docker")) {
+          await streamLines(SPECIFIC_QUERIES["skill-docker"]);
+        } else if (value.includes("rag") || value.includes("llm")) {
+          await streamLines(SPECIFIC_QUERIES["skill-rag"]);
         } else if (value.includes("backend") || value.includes("ai")) {
           await streamLines(SPECIFIC_QUERIES["focus-ai"]);
         } else {
@@ -344,11 +436,13 @@ export default function AIAssistant() {
       } else if (type === "role") {
         if (value.includes("ideas") || value.includes("tih") || value.includes("isi")) {
           await streamLines(SPECIFIC_QUERIES["role-ideas"]);
+        } else if (value.includes("gameonix") || value.includes("game")) {
+          await streamLines(SPECIFIC_QUERIES["role-gameonix"]);
         } else {
           await streamLines([
             "system~ Querying professional experience logs...",
             `system~ No specific logs for: "${match[2]}"`,
-            "system~ Try querying role: 'query --role \"IDEAS-TIH\"'"
+            "system~ Try querying role: 'query --role \"IDEAS-TIH\"' or 'query --role \"GAMEONIX\"'"
           ]);
         }
       } else if (type === "focus") {

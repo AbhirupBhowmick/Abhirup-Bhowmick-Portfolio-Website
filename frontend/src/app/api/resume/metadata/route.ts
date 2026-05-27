@@ -26,7 +26,15 @@ export async function GET() {
     }
 
     const stats = fs.statSync(targetPath);
-    const sizeMB = (stats.size / (1024 * 1024)).toFixed(2);
+    const sizeBytes = stats.size;
+    let sizeStr = "";
+    if (sizeBytes < 1024) {
+      sizeStr = `${sizeBytes} B`;
+    } else if (sizeBytes < 1024 * 1024) {
+      sizeStr = `${(sizeBytes / 1024).toFixed(1)} KB`;
+    } else {
+      sizeStr = `${(sizeBytes / (1024 * 1024)).toFixed(2)} MB`;
+    }
     
     const modifiedDate = new Date(stats.mtime);
     const month = modifiedDate.toLocaleString("en-US", { month: "long" });
@@ -39,7 +47,7 @@ export async function GET() {
 
     return NextResponse.json({
       filename: path.basename(targetPath),
-      size: `${sizeMB} MB`,
+      size: sizeStr,
       modified: `${month} ${year}`,
       version,
       url: `/resume/${path.basename(targetPath)}`
