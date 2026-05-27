@@ -18,7 +18,7 @@ export default function About() {
         <div className="flex flex-col md:flex-row md:items-start gap-8 lg:gap-12 mb-20">
           <div className="relative w-20 h-20 md:w-28 md:h-28 flex-shrink-0 rounded-full overflow-hidden border border-white/10 grayscale opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-500 shadow-[0_0_20px_rgba(255,255,255,0.03)]">
             <img 
-              src="/portrait.png" 
+              src="/4bcc7498-30ac-4dd6-a884-8c17c6517e85.JPG" 
               alt="Abhirup Bhowmick" 
               className="w-full h-full object-cover object-center scale-[1.05]"
             />
