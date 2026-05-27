@@ -57,13 +57,24 @@ export default function ContactPortal() {
     e.preventDefault();
     console.log("[CONTACT_FORM] FORM SUBMITTED");
 
+    // Reset stale error state before new submission
+    setErrorMessage("");
+
     if (status === "sending") {
       console.warn("[CONTACT_FORM] Already sending — ignoring duplicate submit.");
       return;
     }
 
     // Client-side rate limiting / cooldown check
-    const lastSend = localStorage.getItem("portfolio_last_contact_ts");
+    let lastSend = null;
+    try {
+      if (typeof window !== "undefined" && window.localStorage) {
+        lastSend = localStorage.getItem("portfolio_last_contact_ts");
+      }
+    } catch (storageErr) {
+      console.warn("[CONTACT_FORM] localStorage read error ignored:", storageErr);
+    }
+    
     const now = Date.now();
     const COOLDOWN_TIME = 30000; // 30 seconds
 
@@ -126,7 +137,13 @@ export default function ContactPortal() {
         console.log("[CONTACT_FORM] SUCCESS — email dispatched. Resend ID:", result.id);
         
         // Save send timestamp for rate limiting cooldown
-        localStorage.setItem("portfolio_last_contact_ts", Date.now().toString());
+        try {
+          if (typeof window !== "undefined" && window.localStorage) {
+            localStorage.setItem("portfolio_last_contact_ts", Date.now().toString());
+          }
+        } catch (storageErr) {
+          console.warn("[CONTACT_FORM] localStorage write error ignored:", storageErr);
+        }
 
         setTerminalLogs(prev => [
           ...prev,
