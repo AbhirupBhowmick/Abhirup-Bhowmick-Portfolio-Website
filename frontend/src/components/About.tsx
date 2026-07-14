@@ -89,10 +89,10 @@ export default function About() {
                 <Briefcase size={18} className="text-gray-400" />
                 <h3 className="text-sm font-semibold tracking-widest uppercase text-white">Experience</h3>
               </div>
-              <h4 className="text-lg font-semibold text-white mb-2">Technical Engineering Associate</h4>
-              <p className="text-sm text-gray-400 mb-4">IDEAS-TIH, Indian Statistical Institute (ISI) Kolkata</p>
+              <h4 className="text-lg font-semibold text-white mb-2">Full Stack Developer (Intern)</h4>
+              <p className="text-sm text-gray-400 mb-4">Geekglory Technologies Private Limited</p>
               <p className="text-sm text-gray-500 leading-relaxed">
-                Engineered scalable backend services and analytics pipelines for enterprise AI/ML research systems. Optimized SQL schemas and data workflows, and implemented production-grade testing.
+                Developed comprehensive frontend and backend features for various application modules and user workflows. Engaged in API integration, ensuring seamless database-driven functionality and robust debugging processes. Collaborated with a team of developers to deliver reliable and scalable software solutions.
               </p>
             </div>
           </motion.div>
@@ -110,10 +110,10 @@ export default function About() {
                 <Code2 size={18} className="text-gray-400" />
                 <h3 className="text-sm font-semibold tracking-widest uppercase text-white">Experience</h3>
               </div>
-              <h4 className="text-lg font-semibold text-white mb-2">Software Development Intern</h4>
-              <p className="text-sm text-gray-400 mb-4">Gameonix</p>
+              <h4 className="text-lg font-semibold text-white mb-2">Autumn Internship Programme</h4>
+              <p className="text-sm text-gray-400 mb-4">Linguistic Research Unit (ISI, Kolkata)</p>
               <p className="text-sm text-gray-500 leading-relaxed">
-                Built responsive frontend systems integrated with scalable backend services within Agile engineering cycles. Improved application reliability and resolved critical performance bottlenecks.
+                Worked on backend workflows, APIs, debugging activities, and scalable engineering processes. Collaborated with engineering teams on troubleshooting, workflow optimization, and technical documentation.
               </p>
             </div>
           </motion.div>

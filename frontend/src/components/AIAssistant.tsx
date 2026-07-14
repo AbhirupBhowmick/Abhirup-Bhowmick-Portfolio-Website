@@ -24,7 +24,7 @@ const KNOWLEDGE_BASE: Record<string, string[]> = {
     "ADVANCED QUERY FORMAT:",
     "  query --project \"[name]\"  (e.g., query --project \"Visi Core AI\")",
     "  query --skill \"[name]\"    (e.g., query --skill \"Spring Boot\")",
-    "  query --role \"[name]\"     (e.g., query --role \"IDEAS-TIH\")",
+    "  query --role \"[name]\"     (e.g., query --role \"Geekglory\")",
     "  query --focus \"[name]\"    (e.g., query --focus \"AI Systems\")"
   ],
   about: [
@@ -69,12 +69,12 @@ const KNOWLEDGE_BASE: Record<string, string[]> = {
     "system~ Querying experience directory...",
     "system~ Matching professional records...",
     "",
-    "1. AI DEVELOPER INTERN // IDEAS-TIH (ISI Kolkata)",
-    "   - Period: Dec 2024 - Present",
-    "   - Focus: Distributed semantic knowledge graphs, Neo4j architecture, RAG pipelines.",
-    "2. FRONTEND DEVELOPER INTERN // GAMEONIX",
-    "   - Period: Jul 2024 - Sep 2024",
-    "   - Focus: High-performance user interfaces, React/Next.js dashboard engineering."
+    "1. FULL STACK DEVELOPER (INTERN) // GEEKGLORY TECHNOLOGIES",
+    "   - Period: Mar 2025 - Jun 2026",
+    "   - Focus: Comprehensive frontend and backend features, API integration, debugging.",
+    "2. AUTUMN INTERNSHIP PROGRAMME // LINGUISTIC RESEARCH UNIT (ISI, KOLKATA)",
+    "   - Period: Aug 2025 - Sep 2025",
+    "   - Focus: Backend workflows, APIs, troubleshooting, technical documentation."
   ],
   stack: [
     "system~ Retrieving system topology parameters...",
@@ -201,25 +201,25 @@ const SPECIFIC_QUERIES: Record<string, string[]> = {
     "→ Integrated semantic vector searches with custom LLM client wrappers.",
     "→ Programmed semantic validation and output structure layers to prevent hallucinations."
   ],
-  "role-ideas": [
+  "role-geekglory": [
     "system~ Querying institutional archive...",
     "system~ Retrieving engineering logs...",
     "",
-    "Professional Role: Technical Engineering Associate @ IDEAS-TIH (ISI Kolkata)",
-    "→ Period: Dec 2024 - Present (Ongoing)",
-    "→ Engineered scalable backend services and analytics pipelines for enterprise systems.",
-    "→ Created hierarchical semantic knowledge graphs representing academic profiles.",
-    "→ Built optimized Cypher queries to perform multi-hop relational path searches."
+    "Professional Role: Full Stack Developer (Intern) @ Geekglory Technologies Private Limited",
+    "→ Period: Mar 2025 - Jun 2026",
+    "→ Developed comprehensive frontend and backend features for various application modules.",
+    "→ Engaged in API integration, ensuring seamless database-driven functionality.",
+    "→ Collaborated with a team of developers to deliver reliable and scalable software solutions."
   ],
-  "role-gameonix": [
+  "role-linguistic": [
     "system~ Querying institutional archive...",
     "system~ Retrieving engineering logs...",
     "",
-    "Professional Role: Software Development Intern @ Gameonix",
-    "→ Period: Jul 2024 - Sep 2024 (Completed)",
-    "→ Developed responsive frontend topologies integrated with scalable backend REST services.",
-    "→ Collaborated in Agile cycles to improve overall application reliability and system uptime.",
-    "→ Discovered and resolved critical rendering and layout bottlenecks across high-performance dashboards."
+    "Professional Role: Autumn Internship Programme @ Linguistic Research Unit (ISI, Kolkata)",
+    "→ Period: Aug 2025 - Sep 2025",
+    "→ Worked on backend workflows, APIs, debugging activities, and scalable engineering processes.",
+    "→ Collaborated with engineering teams on troubleshooting and workflow optimization.",
+    "→ Focused on technical documentation."
   ],
   "focus-ai": [
     "system~ Retrieving core philosophy node...",
@@ -434,15 +434,15 @@ export default function AIAssistant() {
           ]);
         }
       } else if (type === "role") {
-        if (value.includes("ideas") || value.includes("tih") || value.includes("isi")) {
-          await streamLines(SPECIFIC_QUERIES["role-ideas"]);
-        } else if (value.includes("gameonix") || value.includes("game")) {
-          await streamLines(SPECIFIC_QUERIES["role-gameonix"]);
+        if (value.includes("geekglory") || value.includes("technologies")) {
+          await streamLines(SPECIFIC_QUERIES["role-geekglory"]);
+        } else if (value.includes("linguistic") || value.includes("isi") || value.includes("research")) {
+          await streamLines(SPECIFIC_QUERIES["role-linguistic"]);
         } else {
           await streamLines([
             "system~ Querying professional experience logs...",
             `system~ No specific logs for: "${match[2]}"`,
-            "system~ Try querying role: 'query --role \"IDEAS-TIH\"' or 'query --role \"GAMEONIX\"'"
+            "system~ Try querying role: 'query --role \"Geekglory\"' or 'query --role \"Linguistic Research Unit\"'"
           ]);
         }
       } else if (type === "focus") {
@@ -515,7 +515,7 @@ export default function AIAssistant() {
             <p className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-4">Suggested Queries</p>
             {[
               'query --project "Visi Core AI"', 
-              'query --role "IDEAS-TIH"', 
+              'query --role "Geekglory"', 
               'query --skills "Backend & AI"'
             ].map((cmd) => (
               <button 
