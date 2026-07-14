@@ -14,23 +14,22 @@ const timelineItems = [
     ]
   },
   {
-    year: "AUG 2025 - SEP 2025",
-    title: "Technical Engineering Associate",
-    organization: "IDEAS-TIH, Indian Statistical Institute (ISI) Kolkata",
+    year: "MAR 2025 - JUN 2026",
+    title: "Full Stack Developer (Intern)",
+    organization: "Geekglory Technologies Private Limited",
     details: [
-      "Engineered scalable backend services and analytics pipelines for enterprise AI/ML research systems.",
-      "Optimized SQL schemas, data workflows, and validation pipelines for improved reliability.",
-      "Contributed to production-grade engineering practices including testing, architecture refinement, and workflow optimization."
+      "Developed comprehensive frontend and backend features for various application modules and user workflows.",
+      "Engaged in API integration, ensuring seamless database-driven functionality and robust debugging processes.",
+      "Collaborated with a team of developers to deliver reliable and scalable software solutions."
     ]
   },
   {
-    year: "JUL 2025 - DEC 2025",
-    title: "Software Development Intern",
-    organization: "Gameonix",
+    year: "AUG 2025 - SEP 2025",
+    title: "Autumn Internship Programme",
+    organization: "Linguistic Research Unit (ISI, Kolkata)",
     details: [
-      "Developed responsive frontend systems integrated with scalable backend services.",
-      "Worked within Agile engineering environments to improve application reliability and maintainability.",
-      "Resolved critical performance bottlenecks and improved production workflow efficiency."
+      "Worked on backend workflows, APIs, debugging activities, and scalable engineering processes.",
+      "Collaborated with engineering teams on troubleshooting, workflow optimization, and technical documentation."
     ]
   },
   {
